@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+	<title>Hypervote</title>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="description" content="Live approval voting for the masses">
+	<meta name="author" content="Kit Maywood">
+	
+	<base href="assets/">
+	
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<link rel="stylesheet" type="text/css" href="chartist.css">
+</head>
+<body>
+<div id="wrapper">
+	<div id="header">
+		<h1>Hypervote</h1>
+		
+		<div id="description">
+			<p>Live approval voting for the masses</p>
+		</div>
+	</div>
+	
+	<!-- The good stuff -->
+	<div id="content">
+		<div class="ct-chart ct-golden-section" id="votes-chart"></div>
+		<div id="vote-buttons">
+			<button id="approve">Approve</button>
+			<button id="neutral">Neutral</button>
+			<button id="disapprove">Disapprove</button>
+		</div>
+	</div>
+	<div id="footer">
+		<div id="disclaimer">
+			<p>Nothing you see here should be taken seriously</p>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="chartist.js"></script>
+<script type="text/javascript" src="scripts.js"></script>
+</body>
+</html>
