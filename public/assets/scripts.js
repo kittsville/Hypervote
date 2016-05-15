@@ -163,6 +163,8 @@ Graph = {
 	},
 	
 	drawGraph : function() {
+		Graph.s.lastLabel = Graph.votes.labels.length - 1;
+		
 		if (Graph.hasOwnProperty('chart')) {
 			Graph.chart.update(Graph.votes);
 		} else {
@@ -176,7 +178,7 @@ Graph = {
 							event.element._node.childNodes[0].style.marginLeft = '0px';
 						break;
 						
-						case 5:
+						case Graph.s.lastLabel:
 							event.element._node.childNodes[0].style.marginLeft = '-51px';
 						break;
 					}
