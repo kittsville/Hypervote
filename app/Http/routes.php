@@ -12,5 +12,10 @@
 */
 
 $app->get('/', function () use ($app) {
-    return $app->version();
+    return 'How did you get here?';
+});
+
+$app->group(['prefix' => '/api/v1','namespace' => 'App\Http\Controllers'], function () use ($app) {
+    
+    $app->get('votes', 'VoteController@getVotes');
 });

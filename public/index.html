@@ -24,7 +24,26 @@
 	
 	<!-- The good stuff -->
 	<div id="content">
-		<div class="ct-chart ct-golden-section" id="votes-chart"></div>
+		<div id="votes-chart-wrap">
+			<div id="activity-indicator">
+				<span>Working...</span>
+			</div>
+			<div id="voting-stats">
+				<div id="approve-stat">
+					<span>↑</span>
+					<span id="approve-value">0</span>
+				</div>
+				<div id="neutral-stat">
+					<span>•</span>
+					<span id="neutral-value">0</span>
+				</div>
+				<div id="disapprove-stat">
+					<span>↓</span>
+					<span id="disapprove-value">0</span>
+				</div>
+			</div>
+			<div class="ct-chart ct-golden-section" id="votes-chart"></div>
+		</div>
 		<div id="vote-buttons">
 			<button id="approve">Approve</button>
 			<button id="neutral">Neutral</button>

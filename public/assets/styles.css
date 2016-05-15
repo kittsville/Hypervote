@@ -50,3 +50,44 @@ h1, p {
 #footer p {
 	margin: 0px;
 }
+
+#activity-indicator:not(.active) {
+	opacity: 0;
+}
+
+#votes-chart-wrap {
+	position: relative;
+}
+
+#activity-indicator {
+	opacity: 1;
+	position: absolute;
+	top: 20px;
+	right: calc(50% - 40pt);
+	color: white;
+	background-color: #CB0004;
+	transition: opacity .10s ease-in-out;
+   -moz-transition: opacity .10s ease-in-out;
+   -webkit-transition: opacity .10s ease-in-out;
+	padding: 0px 7px;
+	z-index: 10;
+}
+
+#voting-stats {
+	position: absolute;
+	top: 20px;
+	right: 30px;
+	z-index: 10;
+}
+
+#voting-stats > span {
+	float: right;
+}
+
+#approve-stat {
+	color: #02D706;
+}
+
+#disapprove-stat {
+	color: #D70206;
+}
