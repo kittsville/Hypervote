@@ -3,7 +3,8 @@
  * Wrapper for AJAX requests with simple success/failure callbacks and JSON parsing
  */
 var APIRequest = function(endpoint, params) {
-	var httpRequest  = new XMLHttpRequest(),
+	var params       = params || {},
+	httpRequest      = new XMLHttpRequest(),
 	httpMethod       = params.method || 'GET',           // Sets HTTP Method, default is GET
 	emptyFunction    = function(){},
 	errorFunction    = function(errorObject) {           // Default API error function
