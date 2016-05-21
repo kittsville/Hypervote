@@ -11,11 +11,23 @@
 |
 */
 
+use Illuminate\Http\Request;
+
 $app->get('/', function () use ($app) {
     return 'How did you get here?';
 });
 
 $app->group(['prefix' => '/api/v1','namespace' => 'App\Http\Controllers'], function () use ($app) {
+    $app->get('keys', function () {
+        return response()->json(['error' => 'Nothing to see here'], 501);
+    });
+    
+    $app->post('keys/new',   'KeyController@newKey');
+    $app->get('keys/{key}', 'KeyController@getKey');
     
     $app->get('votes', 'VoteController@getVotes');
+    $app->post('votes/{voteType}', [
+        'middleware' => 'api',
+        'uses'       => 'VoteController@vote',
+    ]);
 });

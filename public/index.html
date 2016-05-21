@@ -44,15 +44,19 @@
 			</div>
 			<div class="ct-chart ct-golden-section" id="votes-chart"></div>
 		</div>
-		<div id="vote-buttons">
-			<button id="approve">Approve</button>
-			<button id="neutral">Neutral</button>
-			<button id="disapprove">Disapprove</button>
+		<div id="voted-info">
+			<p>Your <div id="vote-type"></div> vote will expire in <div id="vote-expire-timer"></div></p>
+			<p>You can vote at any time to overwrite your current vote</p>
 		</div>
+		<form id="vote-buttons" autocomplete="off">
+			<button id="approve" value="approve" disabled>Approve</button>
+			<button id="neutral" value="neutral" disabled>Neutral</button>
+			<button id="disapprove" value="disapprove" disabled>Disapprove</button>
+		</form>
 	</div>
 	<div id="footer">
 		<div id="disclaimer">
-			<p>Nothing you see here should be taken seriously</p>
+			<p>This website uses cookies to keep track of votes. <a href="http://i.giphy.com/xT4uQkbWmOFikhV4Ws.gif" target="_blank">Cookie Policy</a></p>
 		</div>
 	</div>
 </div>

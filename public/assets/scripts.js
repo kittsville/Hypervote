@@ -16,38 +16,32 @@ var APIRequest = function(endpoint, params) {
 	responseJSON     = {},
 	requestCompleted = function() {
 		if (httpRequest.readyState == 4) {
-			if (httpRequest.status >= 200 && httpRequest.status <= 299) {
-				var success = false;
-
-				if (httpMethod === 'GET') {
-					try {
-						responseJSON = JSON.parse(httpRequest.responseText);
-
-						success = true;
-					} catch (e) {
-						failureCallback(httpRequest.responseText, httpRequest);
-					}
+			var validJSON = false;
+			
+			try {
+				var responseJSON = JSON.parse(httpRequest.responseText);
+				
+				validJSON = true;
+			} catch (e) {
+				failureCallback(httpRequest.responseText, httpRequest);
+			}
+			
+			if (validJSON) {
+				if (httpRequest.status >= 200 && httpRequest.status <= 299) {
+					successCallback(responseJSON, httpRequest);
 				} else {
-					success = true;
-				}
-
-				if (success) {
-					if (responseJSON.hasOwnProperty('error')) {
-						errorCallback(responseJSON, httpRequest);
-					} else {
-						successCallback(responseJSON, httpRequest);
-					}
+					errorCallback(responseJSON, httpRequest);
 				}
 			} else {
 				failureCallback(httpRequest.responseText, httpRequest);
 			}
-
+			
 			ActivityIndicator.activityCompleted();
 		}
 	};
 
 	ActivityIndicator.activityStarted();
-
+	
 	httpRequest.open(httpMethod, '/api/v1/' + endpoint, true);
 	httpRequest.onreadystatechange = requestCompleted;
 	
@@ -130,14 +124,14 @@ Graph = {
 		
 		new APIRequest('votes', params);
 		
-		if (Graph.s.loop) {		
+		if (Graph.s.loop) {
 			setTimeout(Graph.getVotesLoop, 2000);
 		}
 	},
 	
 	addLatestVotes : function(response) {
-		var totalVotes = response.up + response.down + response.neutral,
-		average        = (response.up - response.down) / totalVotes,
+		var totalVotes = response.approve + response.disapprove + response.neutral,
+		average        = (response.approve - response.disapprove) / totalVotes,
 		approval       = Math.trunc(average * 100);
 		
 		Graph.votes.labels.push(response.timestamp * 1000); // Unix timestamp is in seconds, JS time in microseconds
@@ -151,16 +145,16 @@ Graph = {
 			Graph.votes.series[0].splice(0, toRemove);
 		}
 		
-		Graph.s.approveStat.textContent    = response.up;
+		Graph.s.approveStat.textContent    = response.approve;
 		Graph.s.neutralStat.textContent    = response.neutral;
-		Graph.s.disapproveStat.textContent = response.down;
+		Graph.s.disapproveStat.textContent = response.disapprove;
 		
 		Graph.drawGraph();
 	},
 	
 	votes : {
-		labels : [1462552828917, 1462552835917, 1462552833917, 1462552836917, 1462552838917, 1462552840917,],
-		series : [[100, 80, 20, -10, -50, -40]],
+		labels : [],
+		series : [[]],
 	},
 	
 	drawGraph : function() {
@@ -187,6 +181,103 @@ Graph = {
 			});
 		}
 	},
+},
+
+Vote = {
+	s : {
+		approveButton    : document.getElementById('approve'),
+		neutralButton    : document.getElementById('neutral'),
+		disapproveButton : document.getElementById('disapprove'),
+	},
+	
+	init : function() {
+		Vote.getAPIKey();
+		
+		Vote.bindUIHandlers();
+	},
+	
+	bindUIHandlers : function() {
+		Vote.s.approveButton.onclick    = Vote.handleVote;
+		Vote.s.neutralButton.onclick    = Vote.handleVote;
+		Vote.s.disapproveButton.onclick = Vote.handleVote;
+	},
+	
+	// Refreshes current API key or gets a new one
+	getAPIKey : function() {
+		var retry = function() {
+			new UserNotification('Failed to enable voting, retrying...', true);
+			
+			setTimeout(Vote.getAPIKey, 3000);
+		},
+		params    = {
+			method  : 'POST',
+			success : function(response) {
+				Vote.APIKey = response.key;
+				Vote.enableVoting();
+			},
+			fail    : retry,
+			error   : retry,
+		};
+		
+		new APIRequest('keys/new', params);
+	},
+	
+	handleVote : function(e) {
+		if (!Vote.votingEnabled) {
+			new UserNotification('Voting not enabled', true);
+			
+			return;
+		}
+		
+		new APIRequest('votes/' + e.target.value + '?api_key=' + Vote.APIKey, {'method' : 'POST'});
+		
+		// Stops event propagation/page reload
+		return false;
+	},
+	
+	enableVoting : function() {
+		Vote.votingEnabled = true;
+		
+		Vote.s.approveButton.disabled    = false;
+		Vote.s.neutralButton.disabled    = false;
+		Vote.s.disapproveButton.disabled = false;
+	},
+	
+	disableVoting : function() {
+		Vote.s.approveButton.disabled    = false;
+		Vote.s.neutralButton.disabled    = false;
+		Vote.s.disapproveButton.disabled = false;
+		
+		Vote.votingEnabled = false;
+	},
+},
+
+UserNotification = function(message, error) {
+	if (typeof error !== 'boolean') {
+		var error = false;
+	}
+	
+	if (error) {
+		console.log('Error: ' + message);
+	} else {
+		console.log(message);
+	}
 };
 
+Vote.init();
 Graph.getVotesLoop();
+
+/**
+ * Helpers
+ * Minor useful functions
+ */
+
+/**
+ * Toggle Hidden
+ * Toggles whether an item is visible
+ */
+HTMLElement.prototype.toggleHidden = function() {
+	this.hidden = !this.hidden;
+	
+	this.classList.toggle('hidden');
+}
