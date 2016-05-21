@@ -91,3 +91,7 @@ h1, p {
 #disapprove-stat {
 	color: #D70206;
 }
+
+#chart-loading {
+	margin-top: 100px;
+}

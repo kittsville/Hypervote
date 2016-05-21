@@ -83,6 +83,7 @@ Graph = {
 		approveStat    : document.getElementById('approve-value'),
 		neutralStat    : document.getElementById('neutral-value'),
 		disapproveStat : document.getElementById('disapprove-value'),
+		loadingMessage : document.getElementById('chart-loading'),
 	},
 	
 	chartistOptions : {
@@ -159,6 +160,8 @@ Graph = {
 		if (Graph.hasOwnProperty('chart')) {
 			Graph.chart.update(Graph.votes);
 		} else {
+			Graph.s.loadingMessage.toggleHidden();
+			
 			Graph.chart = new Chartist.Line('#votes-chart', Graph.votes, Graph.chartistOptions);
 			
 			Graph.chart.on('draw', function(event) {
