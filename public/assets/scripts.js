@@ -228,10 +228,21 @@ Vote = {
 			return;
 		}
 		
-		new APIRequest('votes/' + e.target.value + '?api_key=' + Vote.APIKey, {'method' : 'POST'});
+		Vote.type = e.target.value;
+		
+		var params = {
+			method  : 'POST',
+			success : Vote.votedCallback,
+		};
+		
+		new APIRequest('votes/' + Vote.type + '?api_key=' + Vote.APIKey, params);
 		
 		// Stops event propagation/page reload
 		return false;
+	},
+	
+	votedCallback : function(response) {
+		VoteInfo.displayVoteInfo(Vote.type, new Date(response.expires * 1000));
 	},
 	
 	enableVoting : function() {
@@ -248,6 +259,46 @@ Vote = {
 		Vote.s.disapproveButton.disabled = false;
 		
 		Vote.votingEnabled = false;
+	},
+}
+
+VoteInfo = {
+	s : {
+		voteInfoWrap     : document.getElementById('voted-info'),
+		voteExpiresTimer : document.getElementById('vote-expire-timer'),
+		voteTypeInfo     : document.getElementById('vote-type'),
+	},
+	
+	displaying : false,
+	
+	displayVoteInfo : function(voteType, expiresAt) {
+		VoteInfo.expiresAt = expiresAt;
+		
+		VoteInfo.s.voteTypeInfo.textContent = voteType;
+		
+		VoteInfo.updateExpiresIn();
+		
+		if (!VoteInfo.displaying) {
+			VoteInfo.intervalId = setInterval(VoteInfo.updateExpiresIn, 1000);
+			VoteInfo.displaying = true;
+			VoteInfo.s.voteInfoWrap.toggleHidden();
+		}
+	},
+	
+	hideVoteInfo : function() {
+		VoteInfo.displaying = false;
+		VoteInfo.s.voteInfoWrap.toggleHidden();
+		clearInterval(VoteInfo.intervalId);
+	},
+	
+	updateExpiresIn : function() {
+		var expiresIn = secondsUntil(VoteInfo.expiresAt);
+		
+		if (expiresIn === 0) {
+			VoteInfo.hideVoteInfo();
+		} else {
+			VoteInfo.s.voteExpiresTimer.textContent = expiresIn;
+		}
 	},
 },
 
@@ -290,6 +341,20 @@ function twoDigits(number) {
 	} else {
 		return number;
 	}
+}
+
+/**
+ * Time, in seconds, from now until the given Date object
+ */
+function secondsUntil(futureDate) {
+	var currentTime = new Date().getTime(),
+	futureTime      = futureDate.getTime(),
+	timeDifference  = Math.trunc((futureTime - currentTime) / 1000);
+	
+	// If future date has passed returns 0 rather than negative
+	timeDifference = Math.max(0, timeDifference);
+	
+	return timeDifference;
 }
 
 /**

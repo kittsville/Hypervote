@@ -88,6 +88,14 @@ h1, p {
 	float: right;
 }
 
+#voted-info * {
+	display: inline;
+}
+
+#vote-type, #vote-expire-timer {
+	font-weight: bold;
+}
+
 #approve-stat {
 	color: #02D706;
 }
