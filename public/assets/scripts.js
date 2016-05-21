@@ -273,7 +273,6 @@ Graph.getVotesLoop();
  */
 
 /**
- * Toggle Hidden
  * Toggles whether an item is visible
  */
 HTMLElement.prototype.toggleHidden = function() {
