@@ -112,7 +112,7 @@ Graph = {
 			labelInterpolationFnc: function(timestamp) {
 				dateObj = new Date(timestamp);
 				
-				return dateObj.getHours() + ':' + dateObj.getMinutes() + ':' + dateObj.getSeconds();
+				return dateObj.getTimestamp();
 			}
 		}
 	},
@@ -280,4 +280,23 @@ HTMLElement.prototype.toggleHidden = function() {
 	this.hidden = !this.hidden;
 	
 	this.classList.toggle('hidden');
+}
+
+/**
+ * Ensures given number has two digits
+ * Requires number to have 1 or 2 digits
+ */
+function twoDigits(number) {
+	if (number < 10) {
+		return '0' + number;
+	} else {
+		return number;
+	}
+}
+
+/**
+ * Returns HH:MM:SS timestamp sting
+ */
+Date.prototype.getTimestamp = function() {
+	return twoDigits(dateObj.getHours()) + ':' + twoDigits(dateObj.getMinutes()) + ':' + twoDigits(dateObj.getSeconds());
 }
