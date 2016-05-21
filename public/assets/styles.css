@@ -88,6 +88,23 @@ h1, p {
 	float: right;
 }
 
+form#vote-buttons button {
+	background-color: #FFF;
+	border: none;
+	border-radius: 2px;
+	color: inherit;
+	padding: 6px 12px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: inherit;
+}
+
+/* Removes dotted border from clicked buttons */
+button::-moz-focus-inner {
+	border: 0;
+}
+
 #voted-info * {
 	display: inline;
 }
