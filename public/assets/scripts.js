@@ -200,6 +200,8 @@ Vote = {
 		Vote.s.approveButton.onclick    = Vote.handleVote;
 		Vote.s.neutralButton.onclick    = Vote.handleVote;
 		Vote.s.disapproveButton.onclick = Vote.handleVote;
+		
+		document.addEventListener("keyup", Vote.handleKeyUp);
 	},
 	
 	// Refreshes current API key or gets a new one
@@ -261,6 +263,25 @@ Vote = {
 		
 		Vote.votingEnabled = false;
 	},
+	
+	handleKeyUp : function(e) {
+		switch (e.which) {
+			case 65:
+				Vote.s.approveButton.click();
+				Vote.s.approveButton.focus();
+			break;
+			
+			case 78:
+				Vote.s.neutralButton.click();
+				Vote.s.neutralButton.focus();
+			break;
+			
+			case 68:
+				Vote.s.disapproveButton.click();
+				Vote.s.disapproveButton.focus();
+			break;
+		}
+	}
 }
 
 VoteInfo = {
