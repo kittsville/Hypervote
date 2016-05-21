@@ -79,7 +79,7 @@ ActivityIndicator = {
 Graph = {
 	s : {
 		maxPoints : 15, // Max data points to show
-		loop : true,
+		fetchInterval  : 3000,
 		approveStat    : document.getElementById('approve-value'),
 		neutralStat    : document.getElementById('neutral-value'),
 		disapproveStat : document.getElementById('disapprove-value'),
@@ -114,16 +114,17 @@ Graph = {
 		}
 	},
 	
-	getVotesLoop : function() {
+	init : function () {
+		Graph.getVotes();
+		setInterval(Graph.getVotes, Graph.s.fetchInterval);
+	},
+	
+	getVotes : function() {
 		var params = {
 			success : Graph.addLatestVotes,
 		};
 		
 		new APIRequest('votes', params);
-		
-		if (Graph.s.loop) {
-			setTimeout(Graph.getVotesLoop, 3000);
-		}
 	},
 	
 	addLatestVotes : function(response) {
@@ -315,7 +316,7 @@ UserNotification = function(message, error) {
 };
 
 Vote.init();
-Graph.getVotesLoop();
+Graph.init();
 
 /**
  * Helpers
