@@ -125,7 +125,7 @@ Graph = {
 		new APIRequest('votes', params);
 		
 		if (Graph.s.loop) {
-			setTimeout(Graph.getVotesLoop, 2000);
+			setTimeout(Graph.getVotesLoop, 3000);
 		}
 	},
 	
