@@ -100,6 +100,13 @@ form#vote-buttons button {
 	font-size: inherit;
 }
 
+form#vote-buttons button:focus {
+	outline: 0;
+	border: 2px solid rgb(94, 158, 214);
+	border-radius: 2px;
+	padding: 4px 10px;
+}
+
 /* Removes dotted border from clicked buttons */
 button::-moz-focus-inner {
 	border: 0;
