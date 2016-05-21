@@ -16,24 +16,20 @@ var APIRequest = function(endpoint, params) {
 	responseJSON     = {},
 	requestCompleted = function() {
 		if (httpRequest.readyState == 4) {
-			var validJSON = false;
-			
 			try {
 				var responseJSON = JSON.parse(httpRequest.responseText);
-				
-				validJSON = true;
 			} catch (e) {
 				failureCallback(httpRequest.responseText, httpRequest);
+				
+				ActivityIndicator.activityCompleted();
+				
+				return;
 			}
 			
-			if (validJSON) {
-				if (httpRequest.status >= 200 && httpRequest.status <= 299) {
-					successCallback(responseJSON, httpRequest);
-				} else {
-					errorCallback(responseJSON, httpRequest);
-				}
+			if (httpRequest.status >= 200 && httpRequest.status <= 299) {
+				successCallback(responseJSON, httpRequest);
 			} else {
-				failureCallback(httpRequest.responseText, httpRequest);
+				errorCallback(responseJSON, httpRequest);
 			}
 			
 			ActivityIndicator.activityCompleted();
