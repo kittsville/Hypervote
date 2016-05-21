@@ -59,6 +59,10 @@ h1, p {
 	position: relative;
 }
 
+#votes-chart {
+	overflow: hidden;
+}
+
 #activity-indicator {
 	opacity: 1;
 	position: absolute;
