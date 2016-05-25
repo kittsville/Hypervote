@@ -1,21 +1,30 @@
-## Lumen PHP Framework
+# Hypervote
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+*Live voting for the masses*
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+![Hypervote Logo](https://raw.githubusercontent.com/Kittsville/Hypervote/master/public/assets/screenshot.png")
 
-## Official Documentation
+Hypervote is a live voting system that allows people to express themselves democratically through their browsers. Users can vote to express approval, neutrality or disapproval and view those opinions on a constantly updating line graph.
 
-Documentation for the framework can be found on the [Lumen website](http://lumen.laravel.com/docs).
+## Requirements
 
-## Security Vulnerabilities
+* MySQL, Postgres, SQLite or SQL Server
+* Apache
+* Composer
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+## Installation
+
+If you're looking for any help when installing, bear in mind this uses the Lumen micro-framework so guides for setting up Lumen would be of use.
+
+1. Download and unpack the [latest copy](https://github.com/kittsville/Hypervote/archive/master.zip) of Hypervote
+2. Create a new site in Apache and set its document root to the `/public` directory
+3. Create a new user and database in your chosen DBMS (e.g. MySQL). Note down the username, password and db name
+4. Copy `env.example` and rename the copy `.env`
+5. Open `.env` in a text editor and add in the connection details from earlier
+6. Open the command line in the root of the application and run `composer install` to install all the application's dependencies
+7. Run `php artisan migrate` to create the application's tables
+8. You're good to go!
 
 ### License
 
-The Lumen framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Hypervote is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
