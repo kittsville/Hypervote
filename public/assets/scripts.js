@@ -228,7 +228,8 @@ Vote = {
 		if (!Vote.votingEnabled) {
 			new UserNotification('Voting not enabled', true);
 			
-			return;
+			// Stops event propagation/page reload
+			return false;
 		}
 		
 		Vote.type = e.target.value;
