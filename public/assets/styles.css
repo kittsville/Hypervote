@@ -108,7 +108,7 @@ form#vote-buttons button:focus {
 }
 
 /* Removes dotted border from clicked buttons */
-button::-moz-focus-inner {
+form#vote-buttons button::-moz-focus-inner {
 	border: 0;
 }
 
