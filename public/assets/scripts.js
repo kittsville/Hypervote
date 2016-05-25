@@ -258,9 +258,9 @@ Vote = {
 	},
 	
 	disableVoting : function() {
-		Vote.s.approveButton.disabled    = false;
-		Vote.s.neutralButton.disabled    = false;
-		Vote.s.disapproveButton.disabled = false;
+		Vote.s.approveButton.disabled    = true;
+		Vote.s.neutralButton.disabled    = true;
+		Vote.s.disapproveButton.disabled = true;
 		
 		Vote.votingEnabled = false;
 	},
