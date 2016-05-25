@@ -2,7 +2,7 @@
 
 *Live voting for the masses*
 
-![Hypervote Logo](https://raw.githubusercontent.com/Kittsville/Hypervote/master/public/assets/screenshot.png")
+![Hypervote Logo](https://github.com/kittsville/Hypervote/raw/master/public/assets/screenshot.png)
 
 Hypervote is a live voting system that allows people to express themselves democratically through their browsers. Users can vote to express approval, neutrality or disapproval and view those opinions on a constantly updating line graph.
 
