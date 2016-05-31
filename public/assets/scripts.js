@@ -123,7 +123,7 @@ Graph = {
 	
 	init : function () {
 		Graph.getVotes();
-		setInterval(Graph.getVotes, Graph.s.fetchInterval);
+		Graph.intervalId = setInterval(Graph.getVotes, Graph.s.fetchInterval);
 	},
 	
 	getVotes : function() {
@@ -132,6 +132,11 @@ Graph = {
 		};
 		
 		new APIRequest('votes', params);
+	},
+	
+	// I want to get off Mr Bones Wild Ride
+	stopGettingVotes() {
+		clearInterval(Graph.intervalId);
 	},
 	
 	addLatestVotes : function(response) {
