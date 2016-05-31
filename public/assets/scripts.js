@@ -21,8 +21,6 @@ var APIRequest = function(endpoint, params) {
 			} catch (e) {
 				failureCallback(httpRequest.responseText, httpRequest);
 				
-				ActivityIndicator.activityCompleted();
-				
 				return;
 			}
 			
@@ -31,12 +29,8 @@ var APIRequest = function(endpoint, params) {
 			} else {
 				errorCallback(responseJSON, httpRequest);
 			}
-			
-			ActivityIndicator.activityCompleted();
 		}
 	};
-
-	ActivityIndicator.activityStarted();
 	
 	httpRequest.open(httpMethod, '/api/v1/' + endpoint, true);
 	httpRequest.onreadystatechange = requestCompleted;
