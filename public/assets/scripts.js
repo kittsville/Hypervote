@@ -6,6 +6,7 @@ var APIRequest = function(endpoint, params) {
 	var params       = params || {},
 	httpRequest      = new XMLHttpRequest(),
 	httpMethod       = params.method || 'GET',           // Sets HTTP Method, default is GET
+	showActivity     = httpMethod !== 'GET',
 	emptyFunction    = function(){},
 	errorFunction    = function(errorObject) {           // Default API error function
 		console.log('API Error: ' + errorObject.error);
@@ -21,6 +22,10 @@ var APIRequest = function(endpoint, params) {
 			} catch (e) {
 				failureCallback(httpRequest.responseText, httpRequest);
 				
+				if (showActivity) {
+					ActivityIndicator.activityCompleted();
+				}
+				
 				return;
 			}
 			
@@ -29,8 +34,16 @@ var APIRequest = function(endpoint, params) {
 			} else {
 				errorCallback(responseJSON, httpRequest);
 			}
+			
+			if (showActivity) {
+				ActivityIndicator.activityCompleted();
+			}
 		}
 	};
+	
+	if (showActivity) {
+		ActivityIndicator.activityStarted();
+	}
 	
 	httpRequest.open(httpMethod, '/api/v1/' + endpoint, true);
 	httpRequest.onreadystatechange = requestCompleted;
