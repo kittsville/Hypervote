@@ -280,6 +280,10 @@ Vote = {
 	},
 	
 	handleKeyUp : function(e) {
+		if (e.ctrlKey || e.altKey) {
+			return;
+		}
+		
 		switch (e.which) {
 			case 65:
 				Vote.s.approveButton.click();
