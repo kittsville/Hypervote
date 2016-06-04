@@ -87,7 +87,7 @@ ActivityIndicator = {
 
 Graph = {
 	s : {
-		maxPoints : 15, // Max data points to show
+		maxPoints : 17, // Max data points to show
 		fetchInterval  : 3000,
 		approveStat    : document.getElementById('approve-value'),
 		neutralStat    : document.getElementById('neutral-value'),
@@ -122,6 +122,55 @@ Graph = {
 			}
 		}
 	},
+	
+	// Removes excess labels on small screens
+	responsiveOptions : [
+		['screen and (min-width: 841px) and (max-width: 1440px)', {
+			axisX: {
+				offset: 20,
+				labelInterpolationFnc: function(timestamp, index) {
+					// Skips every other label
+					if ((index % 2 === 0 && index < Graph.lastLabel - 1) || index === Graph.lastLabel) {
+						dateObj = new Date(timestamp);
+						
+						return dateObj.getTimestamp();
+					} else {
+						return '';
+					}
+				},
+			},
+		}],
+		['screen and (min-width: 481px) and (max-width: 840px)', {
+			axisX: {
+				offset: 20,
+				labelInterpolationFnc: function(timestamp, index) {
+					// Skips 3 labels out of every 4 (excluding last label)
+					if ((index % 4 === 0 && index < Graph.lastLabel - 3) || index === Graph.lastLabel) {
+						dateObj = new Date(timestamp);
+						
+						return dateObj.getTimestamp();
+					} else {
+						return '';
+					}
+				},
+			},
+		}],
+		['screen and (max-width: 480px)', {
+			axisX: {
+				offset: 20,
+				labelInterpolationFnc: function(timestamp, index) {
+					// Skips all but first, middle and last labels
+					if (index === 0 || index === Graph.lastLabel / 2 || index === Graph.lastLabel) {
+						dateObj = new Date(timestamp);
+						
+						return dateObj.getTimestamp();
+					} else {
+						return '';
+					}
+				},
+			},
+		}],
+	],
 	
 	init : function () {
 		Graph.getVotes();
@@ -177,7 +226,7 @@ Graph = {
 		} else {
 			Graph.s.loadingMessage.toggleHidden();
 			
-			Graph.chart = new Chartist.Line('#votes-chart', Graph.votes, Graph.chartistOptions);
+			Graph.chart = new Chartist.Line('#votes-chart', Graph.votes, Graph.chartistOptions, Graph.responsiveOptions);
 			
 			Graph.chart.on('draw', function(event) {
 				// If the draw event is for labels on the x-axis
