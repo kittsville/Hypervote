@@ -337,16 +337,50 @@ VoteInfo = {
 	},
 },
 
-UserNotification = function(message, error) {
-	if (typeof error !== 'boolean') {
-		var error = false;
-	}
+UserNotifications = {
+	s : {
+		displayElement : document.getElementById('notification'),
+		fadeTime       : 100, // Time, in milliseconds, for notification to fade in/out
+	},
 	
-	if (error) {
-		console.log('Error: ' + message);
-	} else {
-		console.log(message);
-	}
+	buffer     : [],
+	displaying : false,
+	
+	addNotification : function(message) {
+		
+		UserNotifications.buffer.push(message);
+		
+		UserNotifications.displayNotification();
+	},
+	
+	// Displays a notification, if possible
+	displayNotification : function() {
+		if (UserNotifications.displaying || UserNotifications.buffer.length === 0) {
+			return;
+		}
+		
+		UserNotifications.displaying = true;
+		
+		var notification = UserNotifications.buffer.shift();
+		
+		UserNotifications.s.displayElement.textContent = notification;
+		
+		var displayFor = readTime(notification) + UserNotifications.s.fadeTime;
+		
+		setTimeout(UserNotifications.hideNotification, displayFor);
+		
+		UserNotifications.s.displayElement.toggleHidden();
+	},
+	
+	hideNotification : function() {
+		UserNotifications.s.displayElement.toggleHidden();
+		
+		setTimeout(function() {
+			UserNotifications.displaying = false;
+			
+			UserNotifications.displayNotification();
+		}, UserNotifications.s.fadeTime);
+	},
 };
 
 Vote.init();
@@ -390,6 +424,22 @@ function secondsUntil(futureDate) {
 	timeDifference = Math.max(0, timeDifference);
 	
 	return timeDifference;
+}
+
+/**
+ * Time, in milliseconds, it would take to read the given text
+ */
+function readTime(text) {
+	// Assume 150 milliseconds per character
+	var readTime = text.length * 150;
+	
+	// Allows at least 3 seconds
+	readTime = Math.max(readTime, 3000);
+	
+	// Allows at most 9 seconds
+	readTime = Math.min(readTime, 9000);
+	
+	return readTime;
 }
 
 /**

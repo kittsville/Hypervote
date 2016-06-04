@@ -14,6 +14,7 @@ html, body {
 }
 #header {
 	padding: 10px;
+	text-align: center;
 }
 
 h1, p {
@@ -51,8 +52,12 @@ h1, p {
 	margin: 0px;
 }
 
-#activity-indicator:not(.active) {
-	opacity: 0;
+#notification-wrap {
+	height: 1.5em;
+}
+
+#notification {
+	margin: 10px auto;
 }
 
 #votes-chart-wrap {
@@ -64,17 +69,24 @@ h1, p {
 }
 
 #activity-indicator {
-	opacity: 1;
 	position: absolute;
 	top: 20px;
 	right: calc(50% - 40pt);
+	z-index: 10;
+}
+
+#activity-indicator:not(.active) {
+	opacity: 0;
+}
+
+.notice {
+	opacity: 1;
 	color: white;
 	background-color: #CB0004;
 	transition: opacity .10s ease-in-out;
    -moz-transition: opacity .10s ease-in-out;
    -webkit-transition: opacity .10s ease-in-out;
 	padding: 0px 7px;
-	z-index: 10;
 }
 
 #voting-stats {
