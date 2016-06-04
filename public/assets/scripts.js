@@ -219,7 +219,7 @@ Vote = {
 	// Refreshes current API key or gets a new one
 	getAPIKey : function() {
 		var retry = function() {
-			new UserNotification('Failed to enable voting, retrying...', true);
+			UserNotifications.addNotification('Failed to enable voting, retrying...');
 			
 			setTimeout(Vote.getAPIKey, 3000);
 		},
@@ -238,7 +238,7 @@ Vote = {
 	
 	handleVote : function(e) {
 		if (!Vote.votingEnabled) {
-			new UserNotification('Voting not enabled', true);
+			UserNotifications.addNotification('Voting not enabled');
 			
 			// Stops event propagation/page reload
 			return false;
