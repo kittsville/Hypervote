@@ -9,7 +9,7 @@ var APIRequest = function(endpoint, params) {
 	showActivity     = httpMethod !== 'GET',
 	emptyFunction    = function(){},
 	errorFunction    = function(errorObject) {           // Default API error function
-		console.log('API Error: ' + errorObject.error);
+		UserNotifications.addNotification(errorObject.error);
 	},
 	successCallback  = params.success || emptyFunction,  // Optional AJAX success callback
 	failureCallback  = params.fail || emptyFunction,     // Optional AJAX failure callback
@@ -32,6 +32,8 @@ var APIRequest = function(endpoint, params) {
 			if (httpRequest.status >= 200 && httpRequest.status <= 299) {
 				successCallback(responseJSON, httpRequest);
 			} else {
+				console.log('API Error: ' + errorObject.error);
+				
 				errorCallback(responseJSON, httpRequest);
 			}
 			
