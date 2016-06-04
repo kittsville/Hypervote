@@ -385,9 +385,6 @@ UserNotifications = {
 	},
 };
 
-Vote.init();
-Graph.init();
-
 /**
  * Helpers
  * Minor useful functions
@@ -450,3 +447,6 @@ function readTime(text) {
 Date.prototype.getTimestamp = function() {
 	return twoDigits(dateObj.getHours()) + ':' + twoDigits(dateObj.getMinutes()) + ':' + twoDigits(dateObj.getSeconds());
 }
+
+Vote.init();
+Graph.init();
