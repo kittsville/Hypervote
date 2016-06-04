@@ -75,17 +75,9 @@ h1, p {
 	z-index: 10;
 }
 
-#activity-indicator:not(.active) {
-	opacity: 0;
-}
-
 .notice {
-	opacity: 1;
 	color: white;
 	background-color: #CB0004;
-	transition: opacity .10s ease-in-out;
-   -moz-transition: opacity .10s ease-in-out;
-   -webkit-transition: opacity .10s ease-in-out;
 	padding: 0px 7px;
 }
 

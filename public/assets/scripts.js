@@ -67,7 +67,7 @@ ActivityIndicator = {
 		ActivityIndicator.s.activities++;
 
 		if (ActivityIndicator.s.activities > 0) {
-			ActivityIndicator.s.element.classList.add('active');
+			ActivityIndicator.s.element.toggleHidden();
 		}
 	},
 
@@ -80,7 +80,7 @@ ActivityIndicator = {
 		}
 
 		if (ActivityIndicator.s.activities === 0) {
-			ActivityIndicator.s.element.classList.remove('active');
+			ActivityIndicator.s.element.toggleHidden();
 		}
 	},
 },
