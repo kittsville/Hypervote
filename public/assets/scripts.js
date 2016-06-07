@@ -200,7 +200,7 @@ Graph = {
 		
 		var toRemove = Graph.votes.labels.length - Graph.s.maxPoints;
 		
-		// Cuts number of values down to 10
+		// Ensures no more than the $maxPoints of values are stored
 		if (toRemove > 0) {
 			Graph.votes.labels.splice(0, toRemove);
 			Graph.votes.series[0].splice(0, toRemove);
