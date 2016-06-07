@@ -5,7 +5,7 @@
 var APIRequest = function(endpoint, params) {
 	var params       = params || {},
 	httpRequest      = new XMLHttpRequest(),
-	httpMethod       = params.method || 'GET',           // Sets HTTP Method, default is GET
+	httpMethod       = params.method || 'GET',                 // Sets HTTP Method, default is GET
 	showActivity     = httpMethod !== 'GET',
 	successCallback  = params.success || function(){},         // Optional AJAX success callback
 	failureCallback  = params.fail || function(httpRequest) {  // Optional AJAX failure callback
