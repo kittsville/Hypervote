@@ -7,20 +7,20 @@ var APIRequest = function(endpoint, params) {
 	httpRequest      = new XMLHttpRequest(),
 	httpMethod       = params.method || 'GET',           // Sets HTTP Method, default is GET
 	showActivity     = httpMethod !== 'GET',
-	emptyFunction    = function(){},
-	errorFunction    = function(errorObject) {           // Default API error function
+	successCallback  = params.success || function(){},         // Optional AJAX success callback
+	failureCallback  = params.fail || function(httpRequest) {  // Optional AJAX failure callback
+		UserNotifications.addNotification('Something went wrong. Try reloading the page');
+	},
+	errorCallback    = params.error || function(errorObject) { // Optional API error callback
 		UserNotifications.addNotification(errorObject.error);
 	},
-	successCallback  = params.success || emptyFunction,  // Optional AJAX success callback
-	failureCallback  = params.fail || emptyFunction,     // Optional AJAX failure callback
-	errorCallback    = params.error || errorFunction,    // Optional AJAX API error callback
 	responseJSON     = {},
 	requestCompleted = function() {
 		if (httpRequest.readyState == 4) {
 			try {
 				var responseJSON = JSON.parse(httpRequest.responseText);
 			} catch (e) {
-				failureCallback(httpRequest.responseText, httpRequest);
+				failureCallback(httpRequest);
 				
 				if (showActivity) {
 					ActivityIndicator.activityCompleted();
