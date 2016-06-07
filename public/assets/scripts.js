@@ -191,9 +191,14 @@ Graph = {
 	},
 	
 	addLatestVotes : function(response) {
-		var totalVotes = response.approve + response.disapprove + response.neutral,
-		average        = (response.approve - response.disapprove) / totalVotes,
-		approval       = Math.trunc(average * 100);
+		var totalVotes = response.approve + response.disapprove + response.neutral;
+		
+		if (totalVotes === 0) {
+			var approval = null;
+		} else {
+			var average = (response.approve - response.disapprove) / totalVotes,
+			approval    = Math.trunc(average * 100);
+		}
 		
 		Graph.votes.labels.push(response.timestamp * 1000); // Unix timestamp is in seconds, JS time in microseconds
 		Graph.votes.series[0].push(approval);
