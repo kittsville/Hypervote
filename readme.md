@@ -25,6 +25,10 @@ If you're looking for any help when installing, bear in mind this uses the Lumen
 7. Run `php artisan migrate` to create the application's tables
 8. You're good to go!
 
+### Contributing
+
+As with all my projects: forks, pull requests and bug reports are more than welcome! If you've any queries on getting Hypervote up and running on your local machine or how it works feel free to drop me an email (kittsville[at]gmail.com) or mention me on Twitter (@kittsville).
+
 ### License
 
 Hypervote is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
