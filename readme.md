@@ -4,7 +4,9 @@
 
 ![Hypervote Logo](https://github.com/kittsville/Hypervote/raw/master/public/assets/screenshot.png)
 
-Hypervote is a live voting system that allows people to express themselves democratically through their browsers. Users can vote to express approval, neutrality or disapproval and view those opinions on a constantly updating line graph.
+Hypervote is a live voting system that allows people to express themselves democratically through their browsers. Users can vote to express approval, neutrality or disapproval and view those opinions on a constantly updating line graph. Hypervote allows for the simple gauging of a crowd's opinion.
+
+Hypervote is built as a REST API using the PHP microframework [Lumen](http://lumen.laravel.com/). The front-end is a lightweight web app built from modular JavaScript components.
 
 ## Requirements
 
