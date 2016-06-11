@@ -15,7 +15,7 @@ class Vote extends Model
      *
      * @var array
      */
-    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+    protected $dates = ['created_at', 'updated_at', 'expires_at'];
     
     public function key()
     {

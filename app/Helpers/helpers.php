@@ -20,11 +20,3 @@ function getUserFingerprint(Request $request) {
         '|' . $request->ip()
     );
 }
-
-/**
- * Converts SQL date/time string into Unix timestamp
- * String $string
- */
-function getTimestamp($string) {
-    return (new \DateTime($string))->getTimestamp();
-}

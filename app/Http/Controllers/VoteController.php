@@ -52,7 +52,7 @@ class VoteController extends Controller
         return response()->json([
             'type'    => $voteType,
             'created' => $vote->created_at->timestamp,
-            'expires' => getTimestamp($vote->expires_at),
+            'expires' => $vote->expires_at->timestamp,
         ], 201);
     }
     
