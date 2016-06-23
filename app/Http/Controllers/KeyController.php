@@ -10,7 +10,8 @@ use Carbon\Carbon;
 
 class KeyController extends Controller
 {
-    public function newKey(Request $request) {
+    public function newKey(Request $request)
+    {
         $keyFingerprint = getUserFingerprint($request);
         
         try {
@@ -41,7 +42,8 @@ class KeyController extends Controller
         }
     }
     
-    public function derp() {
+    public function derp()
+    {
         return 'Hello';
     }
     
@@ -49,7 +51,8 @@ class KeyController extends Controller
      * Checks the validity of the given API key
      * @param String $apiKey API key
      */
-    public function getKey(Request $request, $apiKey) {
+    public function getKey(Request $request, $apiKey)
+    {
         if (strlen($apiKey) !== 64) {
             return response()->json(['error' => 'Invalid API Key. All keys are 64 characters long.'], 400);
         }

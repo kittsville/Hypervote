@@ -10,7 +10,8 @@ use Carbon\Carbon;
 
 class VoteController extends Controller
 {
-    public function getVotes() {
+    public function getVotes()
+    {
         $this->cleanupExpiredVotes();
         
         return response()->json([
@@ -21,7 +22,8 @@ class VoteController extends Controller
         ]);
     }
     
-    public function vote(Request $request, $voteType) {
+    public function vote(Request $request, $voteType)
+    {
         $voteTypes = ['approve', 'neutral', 'disapprove'];
         
         if (!in_array($voteType, $voteTypes)) {
