@@ -19,6 +19,9 @@
         },
         "files": [
             "app/Helpers/helpers.php"
+        ],
+        "classmap": [
+            "database/migrations"
         ]
     },
     "autoload-dev": {
