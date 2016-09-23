@@ -32,7 +32,7 @@ var APIRequest = function(endpoint, params) {
 			if (httpRequest.status >= 200 && httpRequest.status <= 299) {
 				successCallback(responseJSON, httpRequest);
 			} else {
-				console.log('API Error: ' + errorObject.error);
+				console.log('API Error: ' + responseJSON.error);
 				
 				errorCallback(responseJSON, httpRequest);
 			}
