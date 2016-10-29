@@ -87,7 +87,7 @@ ActivityIndicator = {
 
 Graph = {
 	s : {
-		maxPoints : 17, // Max data points to show
+		maxPoints      : 17, // Max data points to show
 		fetchInterval  : 3000,
 		approveStat    : document.getElementById('approve-value'),
 		neutralStat    : document.getElementById('neutral-value'),
@@ -96,15 +96,15 @@ Graph = {
 	},
 	
 	chartistOptions : {
-		height         : 300,
-		lineSmooth     : false,
-		high           : 100,
-		referenceValue : 0,
-		low            : -100,
+		height            : 300,
+		lineSmooth        : false,
+		high              : 100,
+		referenceValue    : 0,
+		low               : -100,
 		seriesBarDistance : 50,
-		fullWidth: true,
+		fullWidth         : true,
 		// Y-Axis specific configuration
-		axisY: {
+		axisY : {
 			onlyInteger: true,
 			// Adds percentage to Y-Axis values
 			labelInterpolationFnc: function(value) {
@@ -112,7 +112,7 @@ Graph = {
 			}
 		},
 		// X-Axis specific configuration
-		axisX: {
+		axisX : {
 			offset: 20,
 			// Time UNIX Timestamps into hh/mm/ss
 			labelInterpolationFnc: function(timestamp) {
