@@ -173,8 +173,23 @@ Graph = {
 	],
 	
 	init : function () {
+		Graph.initGraph();
 		Graph.getVotes();
 		Graph.intervalId = setInterval(Graph.getVotes, Graph.s.fetchInterval);
+	},
+	
+	// Initilises graph with blank values
+	initGraph : function() {
+		var time = Date.now() - (Graph.s.fetchInterval * Graph.s.maxPoints);
+		
+		for (i = 0; i < Graph.s.maxPoints; i++) {
+			Graph.votes.labels.push(time);
+			Graph.votes.series[0].push(null);
+			
+			time = time + Graph.s.fetchInterval;
+		}
+		
+		Graph.drawGraph();
 	},
 	
 	getVotes : function() {
